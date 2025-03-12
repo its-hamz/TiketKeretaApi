@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { ScheduleType } from "@/app/karyawan/types"
 import Link from "next/link"
 

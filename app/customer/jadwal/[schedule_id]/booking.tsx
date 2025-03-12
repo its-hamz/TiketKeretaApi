@@ -4,7 +4,6 @@ import { GerbongType } from "@/app/karyawan/types"
 import { axiosIstance } from "@/helper/api"
 import { getCookie } from "@/helper/clientCookie"
 import { useRouter } from "next/navigation"
-import { it } from "node:test"
 import { useEffect, useState } from "react"
 import { toast, ToastContainer } from "react-toastify"
 import Seat from "./seat"
@@ -44,6 +43,8 @@ const Booking = (myProps: Props) => {
         tempWagons[findWagonIndex].seats[findSeatIndex].used = true
         setWagons([...tempWagons])
     }
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const handleRemoveSeat = (index: number, seatBook: seatBook) => {
         const temp = [...details]
         temp.splice(index, 1)
@@ -60,7 +61,7 @@ const Booking = (myProps: Props) => {
         setWagons([...tempWagons])
     }
 
-    const handleSave = async () => {
+    async function handleSave() {
         try {
             if (details.length == 0) {
                 toast(`pilih kursi dulu gantenk`, {
@@ -80,7 +81,7 @@ const Booking = (myProps: Props) => {
             const TOKEN = getCookie(`token`) || ""
 
             const response: any = await axiosIstance.post(url, requestData, {
-                headers: {Authorization: `Bearer ${TOKEN}`}
+                headers: { Authorization: `Bearer ${TOKEN}` }
             })
             if (response.data.success === true) {
                 const message = response.data.message
@@ -90,14 +91,14 @@ const Booking = (myProps: Props) => {
                 })
                 router.replace(`/customer/jadwal`)
             }
-            
+
         } catch (error) {
             console.log(error)
             toast(`some thing wong`, {
                 containerId: `toastAdd`,
                 type: `error`
-            });
-            
+            })
+
         }
     }
 

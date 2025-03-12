@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { PurchaseDetail, ScheduleType } from "@/app/karyawan/types";
 import { showTime } from "../jadwal/schedule";
 

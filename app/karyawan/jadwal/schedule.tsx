@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { ScheduleType } from "../types"
 import DeleteSchedule from "./deleteSchedule"
 import EditSchedule from "./editSchedule"

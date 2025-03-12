@@ -1,6 +1,8 @@
 /**function to call detail kereta
  * that include gerbong dan kursi
  */
+export const dynamic = "force-dynamic";
+
 import { getServerCookie } from "../../../../helper/server-cookie";
 import { axiosIstance } from "../../../../helper/api";
 import { KeretaType } from "../../types";
@@ -16,7 +18,7 @@ const getDetailKereta = async (
         /**hit endpoint */
 
         console.log(`${url} - ${TOKEN}`);
-        
+
         const response: any = await axiosIstance.get(url, {
             headers: {
                 "Authorization": `Bearer ${TOKEN}`
@@ -32,16 +34,16 @@ const getDetailKereta = async (
     }
 }
 type props = {
-    params: {
+    params: Promise<{
         id_kereta: string
         // sesuai dengan nama foldernya
-    }
+    }>
 }
 const DetailKeretaPage = async (
     myProps: props
 ) => {
     // get value of selected "id_kereta"
-    const id_kereta = myProps.params.id_kereta
+    const id_kereta = (await myProps.params).id_kereta
     // get data from backend
     const dataKereta = await getDetailKereta(id_kereta)
 
@@ -69,13 +71,13 @@ const DetailKeretaPage = async (
                             Daftar Gerbong:
                         </h2>
 
-                        <AddGerbong idKereta={Number(id_kereta)}/>
-                        
+                        <AddGerbong idKereta={Number(id_kereta)} />
+
 
                         <div className="my-5 ">
                             {
                                 dataKereta.wagons.map((gerbong, index) => (
-                                  <Gerbong item={gerbong} key={`keyGerbong-${index}`} />
+                                    <Gerbong item={gerbong} key={`keyGerbong-${index}`} />
                                 ))
                             }
                         </div>

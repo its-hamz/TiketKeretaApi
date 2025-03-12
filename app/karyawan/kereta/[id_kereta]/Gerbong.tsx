@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { GerbongType } from "../../types"
 import AddSeat from "./addSeat"
 import DeleteGerbong from "./deleteGerbong"

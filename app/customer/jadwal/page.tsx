@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import FilterJadwal from "./filterJadwal"
 import { getServerCookie } from "@/helper/server-cookie"
 import { axiosIstance } from "@/helper/api"
@@ -26,15 +28,15 @@ const getJadwal = async (departured_location: string, arrived_location: string):
 }
 
 type props = {
-    searchParams: {
+    searchParams: Promise<{
         departured_location?: string
         arrived_location?: string
-    }
+    }>
 }
 
 const JadwalPage = async (myprop: props) => {
-    const departured_location = await (myprop.searchParams)?.departured_location?.toString() || ""
-    const arrived_location = await (myprop.searchParams)?.arrived_location?.toString() || ""
+    const departured_location = (await myprop.searchParams)?.departured_location?.toString() || ""
+    const arrived_location = (await myprop.searchParams)?.arrived_location?.toString() || ""
     const dataJadwal = await getJadwal(departured_location, arrived_location)
 
     return (
